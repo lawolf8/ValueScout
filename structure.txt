@@ -1,0 +1,40 @@
+ValueMap/
+│
+├── backend/
+│   ├── app.py               # Flask application entry point
+│   ├── routes.py            # API routes and endpoints
+│   ├── models.py            # Database models (SQLAlchemy)
+│   ├── scraping/            # Web scraping scripts
+│   │   ├── scraper.py       # Main scraping logic
+│   │   └── utils.py         # Helper functions for scraping
+│   ├── services/            # External API integrations (Google Maps, GasBuddy)
+│   │   ├── google_maps.py   # Google Maps API logic
+│   │   └── gasbuddy.py      # GasBuddy API logic
+│   ├── config.py            # Configuration settings (API keys, database URI)
+│   ├── requirements.txt     # Python dependencies
+│   └── Dockerfile           # Dockerfile for backend
+│
+├── frontend/
+│   ├── public/              # Public assets (index.html, favicon, etc.)
+│   ├── src/
+│   │   ├── components/      # React components
+│   │   ├── pages/           # React pages
+│   │   ├── services/        # API calls (Axios logic)
+│   │   ├── styles/          # CSS/SCSS files
+│   │   ├── App.js           # Main React component
+│   │   └── index.js         # Entry point for React
+│   ├── package.json         # Frontend dependencies
+│   └── Dockerfile           # Dockerfile for frontend
+│
+├── database/
+│   ├── migrations/          # Database migration files
+│   └── seed_data.sql        # SQL scripts to seed initial data
+│
+├── tests/
+│   ├── backend/             # Backend unit tests
+│   └── frontend/            # Frontend unit tests
+│
+├── .gitignore               # Files and directories to ignore in Git
+├── README.md                # Project overview and instructions
+├── docker-compose.yml       # Docker Compose configuration
+└── LICENSE                  # License for the project
