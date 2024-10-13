@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ValueMap - Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Shopping Route Results</h1>
+    </header>
+    <main>
+        <h2>Best Stores for Your Items</h2>
+        <ul>
+            {% for store in stores %}
+                <li>
+                    <h3>{{ store.name }}</h3>
+                    <p>Address: {{ store.address }}</p>
+                    <p>Distance: {{ store.distance }} km</p>
+                    <p>Total Price: ${{ store.totalPrice }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="/">Go Back</a>
+    </main>
+</body>
+</html>

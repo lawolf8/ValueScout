@@ -1,40 +1,34 @@
-ValueMap/
+ValueScout/
 │
 ├── backend/
-│   ├── app.py               # Flask application entry point
-│   ├── routes.py            # API routes and endpoints
-│   ├── models.py            # Database models (SQLAlchemy)
-│   ├── scraping/            # Web scraping scripts
-│   │   ├── scraper.py       # Main scraping logic
-│   │   └── utils.py         # Helper functions for scraping
-│   ├── services/            # External API integrations (Google Maps, GasBuddy)
-│   │   ├── google_maps.py   # Google Maps API logic
-│   │   └── gasbuddy.py      # GasBuddy API logic
-│   ├── config.py            # Configuration settings (API keys, database URI)
-│   ├── requirements.txt     # Python dependencies
-│   └── Dockerfile           # Dockerfile for backend
+│   ├── app.py                   # Main Flask application
+│   ├── config.py                # Configuration file
+│   ├── models.py                # Database models (if needed)
+│   ├── services/                # External API services
+│   │   ├── google_maps.py       # Google Maps API service
+│   │   ├── gasbuddy.py          # GasBuddy API service
+│   │   └── utils.py             # Utility functions (shared helpers)
+│   ├── templates/               # HTML templates (Flask renders these)
+│   │   ├── index.html           # Main home page
+│   │   └── results.html         # Results page
+│   ├── static/                  # Static files (CSS, JS, images)
+│   │   ├── css/
+│   │   │   └── main.css         # Main stylesheet
+│   │   └── js/
+│   │       └── main.js          # Main JavaScript file
+│   └── requirements.txt         # Python dependencies
 │
-├── frontend/
-│   ├── public/              # Public assets (index.html, favicon, etc.)
-│   ├── src/
-│   │   ├── components/      # React components
-│   │   ├── pages/           # React pages
-│   │   ├── services/        # API calls (Axios logic)
-│   │   ├── styles/          # CSS/SCSS files
-│   │   ├── App.js           # Main React component
-│   │   └── index.js         # Entry point for React
-│   ├── package.json         # Frontend dependencies
-│   └── Dockerfile           # Dockerfile for frontend
+├── frontend/                    # If you later want to integrate a React or other frontend framework
+│   ├── index.html               # HTML for frontend (can also be hosted on Flask)
+│   ├── js/
+│   │   └── app.js               # If you want frontend JS separated from Flask templates
+│   └── css/
+│       └── styles.css           # Additional CSS if separate from Flask
 │
-├── database/
-│   ├── migrations/          # Database migration files
-│   └── seed_data.sql        # SQL scripts to seed initial data
+├── env/                         # Virtual environment folder (optional)
 │
-├── tests/
-│   ├── backend/             # Backend unit tests
-│   └── frontend/            # Frontend unit tests
-│
-├── .gitignore               # Files and directories to ignore in Git
-├── README.md                # Project overview and instructions
-├── docker-compose.yml       # Docker Compose configuration
-└── LICENSE                  # License for the project
+├── .env                         # Environment variables for API keys and configuration
+├── .gitignore                   # Ignore unnecessary files in Git (e.g., env/, __pycache__)
+├── docker-compose.yml           # Docker Compose configuration (optional)
+├── Dockerfile                   # Dockerfile for containerizing the app
+└── README.md                    # Project documentation
