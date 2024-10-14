@@ -6,32 +6,96 @@
     <title>ValueMap - Find Your Product and Location</title>
     <!-- Include Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="/static/css/styles.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin: 0;
         }
+
+        /* Menu Bar Styles */
+        .menu-bar {
+            width: 100%;
+            background-color: #333;
+            position: relative;
+        }
+
+        /* Position the hamburger icon in the top right corner */
+        .menu-bar .hamburger {
+            cursor: pointer;
+            padding: 10px 15px;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            font-size: 24px;
+            color: white;
+        }
+
+        /* Position the menu items on the right side of the screen */
+        .menu-bar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            right: 0; /* Align to the right */
+            top: 50px; /* Position below the hamburger */
+            width: 200px; /* Fixed width for the menu */
+            display: none; /* Hidden by default */
+            background-color: #333;
+        }
+
+        .menu-bar ul li {
+            padding: 15px;
+            text-align: right; /* Align text to the right */
+        }
+
+        .menu-bar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            display: block;
+        }
+
+        /* Show the menu when active */
+        .menu-bar ul.active {
+            display: block;
+        }
+
         #map {
             height: 400px;
             width: 100%;
             margin-top: 20px;
         }
+
         form {
             margin-top: 20px;
         }
+
         input[type="text"] {
             width: 300px;
             padding: 10px;
             margin-right: 10px;
         }
+
         button {
             padding: 10px;
         }
     </style>
 </head>
 <body>
+
+    <!-- Menu Bar with Hamburger Icon -->
+    <div class="menu-bar">
+        <span class="hamburger">&#9776;</span>
+        <ul id="menu-items">
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </div>
 
     <h1>Find Product Price and Store Location</h1>
 
@@ -134,6 +198,12 @@
             initMap();  // Always show the map with a default location first
             requestUserLocation();  // Try to get the user's location
         };
+
+        // Hamburger menu toggle functionality
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            const menu = document.getElementById('menu-items');
+            menu.classList.toggle('active'); // Toggle the visibility of the menu
+        });
     </script>
 </body>
 </html>
