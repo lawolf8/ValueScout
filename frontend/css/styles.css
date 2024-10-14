@@ -1,0 +1,39 @@
+/* Default styles (light mode by default) */
+body {
+    background-color: white;
+    color: black;
+    font-family: Arial, sans-serif;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #181818;
+        color: white;
+    }
+
+    h1, h2, h3 {
+        color: #ddd;
+    }
+
+    /* Add any other elements you want to change for dark mode */
+    input, textarea {
+        background-color: #333;
+        color: white;
+        border: 1px solid #555;
+    }
+
+    button {
+        background-color: #444;
+        color: white;
+        border: 1px solid #666;
+    }
+
+    a {
+        color: #1e90ff; /* A color that works on dark background */
+    }
+}

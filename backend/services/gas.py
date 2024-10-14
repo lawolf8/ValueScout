@@ -1,6 +1,6 @@
 import requests
 
-class GasBuddyService:
+class Gas:
     def __init__(self):
         self.api_url = "https://www.gasbuddy.com/graphql"
         self.headers = {

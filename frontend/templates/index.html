@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ValueMap - Find Your Product and Location</title>
+    <!-- Include Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #map {
+            height: 400px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Find Product Price and Store Location</h1>
+
+    <!-- Input Form for Product -->
+    <form id="product-form">
+        <input type="text" id="product-id" placeholder="Enter product ID" />
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- Map where users can click to select their location or auto-detect -->
+    <div id="map"></div>
+
+    <!-- Include Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        let map;
+        let userLatLng = null;
+
+        // Function to initialize the map with a default location (e.g., New York City)
+        function initMap(lat = 40.712776, lng = -74.005974) {
+            // Initialize map at the default location
+            map = L.map('map').setView([lat, lng], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Add marker for the default location
+            L.marker([lat, lng]).addTo(map)
+                .bindPopup('Default Location (New York City)')
+                .openPopup();
+        }
+
+        // Function to request user location
+        function requestUserLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        userLatLng = { lat: lat, lng: lng };
+
+                        // Update map with user's location
+                        map.setView([lat, lng], 13);
+
+                        // Remove the previous marker and add one for the user's location
+                        map.eachLayer(function (layer) {
+                            if (layer instanceof L.Marker) {
+                                map.removeLayer(layer);
+                            }
+                        });
+
+                        L.marker([lat, lng]).addTo(map)
+                            .bindPopup('Your Location')
+                            .openPopup();
+                    },
+                    function() {
+                        console.log('Unable to retrieve your location. Map remains at default location.');
+                    }
+                );
+            } else {
+                console.log('Geolocation is not supported by your browser. Map remains at default location.');
+            }
+        }
+
+        // Handle form submission (send product ID and location to backend)
+        document.getElementById('product-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const productId = document.getElementById('product-id').value;
+
+            if (!userLatLng) {
+                alert('Please enter a product and allow location access to get accurate results.');
+                return;
+            }
+
+            // Send product ID and user location to the backend for calculations
+            fetch('/api/product-price', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    product_id: productId, 
+                    latitude: userLatLng.lat, 
+                    longitude: userLatLng.lng 
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                } else {
+                    alert('Price Data: ' + JSON.stringify(data.price_data));
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        // Initialize map at default location and request user location
+        window.onload = function() {
+            initMap();  // Always show the map with a default location first
+            requestUserLocation();  // Try to get the user's location
+        };
+    </script>
+</body>
+</html>

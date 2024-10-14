@@ -1,34 +1,29 @@
-ValueScout/
+project/
 │
-├── backend/
-│   ├── app.py                   # Main Flask application
-│   ├── config.py                # Configuration file
-│   ├── models.py                # Database models (if needed)
-│   ├── services/                # External API services
-│   │   ├── google_maps.py       # Google Maps API service
-│   │   ├── gasbuddy.py          # GasBuddy API service
-│   │   └── utils.py             # Utility functions (shared helpers)
-│   ├── templates/               # HTML templates (Flask renders these)
-│   │   ├── index.html           # Main home page
-│   │   └── results.html         # Results page
-│   ├── static/                  # Static files (CSS, JS, images)
-│   │   ├── css/
-│   │   │   └── main.css         # Main stylesheet
-│   │   └── js/
-│   │       └── main.js          # Main JavaScript file
-│   └── requirements.txt         # Python dependencies
+├── backend/                    # Backend logic (Flask API)
+│   ├── app.py                  # Flask application with API endpoints
+│   ├── config.py               # Configuration settings
+│   ├── models.py               # Database models
+│   ├── services/               # External API services
+│   │   ├── gas.py              # GasBuddy API service
+│   │   ├── maps.py             # OpenStreetMap service
+│   │   ├── target.py           # Target API service
+│   ├── requirements.txt        # Python dependencies
+│   └── utils.py                # Utility functions
 │
-├── frontend/                    # If you later want to integrate a React or other frontend framework
-│   ├── index.html               # HTML for frontend (can also be hosted on Flask)
-│   ├── js/
-│   │   └── app.js               # If you want frontend JS separated from Flask templates
-│   └── css/
-│       └── styles.css           # Additional CSS if separate from Flask
+├── frontend/                   # Frontend logic
+│   ├── css/                    # CSS styles
+│   │   └── styles.css          # Main CSS file
+│   ├── js/                     # JavaScript logic
+│   │   └── app.js              # Main JavaScript file
+│   ├── templates/              # HTML templates for the frontend
+│   │   ├── index.html          # Frontend home page
+│   │   ├── product_price.html  # Product price and map display
+│   │   └── results.html        # Results page template
 │
-├── env/                         # Virtual environment folder (optional)
-│
-├── .env                         # Environment variables for API keys and configuration
-├── .gitignore                   # Ignore unnecessary files in Git (e.g., env/, __pycache__)
-├── docker-compose.yml           # Docker Compose configuration (optional)
-├── Dockerfile                   # Dockerfile for containerizing the app
-└── README.md                    # Project documentation
+├── .env                        # Environment variables
+├── .gitignore                  # Files to ignore in Git
+├── docker-compose.yml          # Docker Compose configuration (if using Docker)
+├── LICENSE                     # License file
+├── README.md                   # Documentation file
+└── structure.txt               # Project structure documentation
