@@ -1,24 +1,38 @@
-project/
+ValueMap/
 │
 ├── backend/                    # Backend logic (Flask API)
 │   ├── app.py                  # Flask application with API endpoints
 │   ├── config.py               # Configuration settings
 │   ├── models.py               # Database models
+│   ├── auth.py                 # Handles user authentication (JWT or sessions)
 │   ├── services/               # External API services
 │   │   ├── gas.py              # GasBuddy API service
-│   │   ├── maps.py             # OpenStreetMap service
-│   │   ├── target.py           # Target API service
+│   │   ├── maps.py             # OpenStreetMap service (Google Maps requires cloud service)
+│   │   ├── target.py           # Target request service
+│   │   ├── walmart.py          # Walmart request service
+│   │   ├── publix.py           # Publix request service
+│   ├── database/               # Database folder (Handles storage and interactions with the DB)
+│   │   ├── schema.sql          # SQL file for creating tables (users, products, privileges)
+│   │   ├── migrations/         # Database migrations (if using)
+│   │   └── db.py               # Database connection and interaction logic
 │   ├── requirements.txt        # Python dependencies
+│   ├── tests/
+│   │   ├── test_app.py         # Tests for Flask routes and API endpoints
+│   │   ├── test_services.py    # Tests for external service integrations (Target, Walmart, etc.)
+│   │   └── test_database.py    # Tests for database interaction (CRUD operations, migrations)
 │   └── utils.py                # Utility functions
 │
 ├── frontend/                   # Frontend logic
 │   ├── css/                    # CSS styles
-│   │   └── styles.css          # Main CSS file
+│   │   └── styles.css          # Main CSS file (dark/light)
 │   ├── js/                     # JavaScript logic
 │   │   └── app.js              # Main JavaScript file
 │   ├── templates/              # HTML templates for the frontend
-│   │   ├── index.html          # Frontend home page
-│   │   ├── product_price.html  # Product price and map display
+│   │   ├── index.html          # Frontend home page (Map [grab location], selected shopping list, single-store list prices vs cheapest price route, total savings)
+│   │   ├── product_price.html  # Product price search/tracking
+│   │   ├── profile.html        # User Profile (Name, Email, Etc.), guest option max 10 items
+│   │   ├── login.html          # Login Page
+│   │   ├── list.html           # Shopping List, Saved, and Historic 
 │   │   └── results.html        # Results page template
 │
 ├── .env                        # Environment variables
