@@ -1,43 +1,49 @@
+LOCAL HOST
 ValueMap/
 │
 ├── backend/                    # Backend logic (Flask API)
-│   ├── app.py                  # Flask application with API endpoints
-│   ├── config.py               # Configuration settings
-│   ├── models.py               # Database models
+│   ├── app.py                  # Main Flask application handling API endpoints and user requests
+│   ├── config.py               # Configuration settings (API keys, database URIs, etc.)
+│   ├── models.py               # SQLAlchemy database models (e.g., Users, Products, Shopping Lists)
 │   ├── auth.py                 # Handles user authentication (JWT or sessions)
-│   ├── services/               # External API services
-│   │   ├── gas.py              # GasBuddy API service
-│   │   ├── maps.py             # OpenStreetMap service (Google Maps requires cloud service)
-│   │   ├── target.py           # Target request service
-│   │   ├── walmart.py          # Walmart request service
-│   │   ├── publix.py           # Publix request service
+│   ├── pipelines/              # Data pipelines from user input to database storage
+│   │   ├── product_pipeline.py # Pipeline for handling product data (from user input to database)
+│   │   ├── shopping_pipeline.py# Pipeline for handling shopping lists and storing to the database
+│   │   └── user_pipeline.py    # Pipeline for handling user data (registration, profile updates, etc.)
+│   ├── services/               # External API services to fetch real-time data
+│   │   ├── chromedriver.py     # Chromedriver Setup
+│   │   ├── gas.py              # GasBuddy API service to get gas prices
+│   │   ├── maps.py             # OpenStreetMap integration for geolocation and maps
+│   │   ├── target.py           # Target Selenium service for scraping product data
+│   │   ├── walmart.py          # Walmart Selenium service for scraping product data
+│   │   ├── publix.py           # Publix Selenium service for scraping product data
 │   ├── database/               # Database folder (Handles storage and interactions with the DB)
-│   │   ├── schema.sql          # SQL file for creating tables (users, products, privileges)
+│   │   ├── schema.sql          # SQL schema for creating tables (users, user lists, privileges)
 │   │   ├── migrations/         # Database migrations (if using)
-│   │   └── db.py               # Database connection and interaction logic
-│   ├── requirements.txt        # Python dependencies
+│   │   └── db.py               # Database connection logic using SQLAlchemy
+│   ├── requirements.txt        # Python dependencies (Flask, SQLAlchemy, requests, etc.)
 │   ├── tests/
 │   │   ├── test_app.py         # Tests for Flask routes and API endpoints
 │   │   ├── test_services.py    # Tests for external service integrations (Target, Walmart, etc.)
 │   │   └── test_database.py    # Tests for database interaction (CRUD operations, migrations)
-│   └── utils.py                # Utility functions
+│   └── utils.py                # Utility functions used throughout the backend
 │
-├── frontend/                   # Frontend logic
+├── frontend/                   # Frontend logic (User interface)
 │   ├── css/                    # CSS styles
-│   │   └── styles.css          # Main CSS file (dark/light)
-│   ├── js/                     # JavaScript logic
-│   │   └── app.js              # Main JavaScript file
-│   ├── templates/              # HTML templates for the frontend
-│   │   ├── index.html          # Frontend home page (Map [grab location], selected shopping list, single-store list prices vs cheapest price route, total savings)
-│   │   ├── product_price.html  # Product price search/tracking
-│   │   ├── profile.html        # User Profile (Name, Email, Etc.), guest option max 10 items
-│   │   ├── login.html          # Login Page
-│   │   ├── list.html           # Shopping List, Saved, and Historic 
-│   │   └── results.html        # Results page template
+│   │   └── styles.css          # Main CSS file (dark/light mode support)
+│   ├── js/                     # JavaScript logic for interactivity
+│   │   └── app.js              # Main JavaScript file (handling map, user input, AJAX calls)
+│   ├── templates/              # HTML templates for rendering pages
+│   │   ├── index.html          # Home page with map and shopping list features
+│   │   ├── product_price.html  # Product price search and tracking page
+│   │   ├── profile.html        # User Profile page (Name, Email, guest option max 10 items)
+│   │   ├── login.html          # Login page for user authentication
+│   │   ├── list.html           # Shopping list page for saved and historic lists
+│   │   └── results.html        # Results page template for comparing prices and savings
 │
-├── .env                        # Environment variables
-├── .gitignore                  # Files to ignore in Git
-├── docker-compose.yml          # Docker Compose configuration (if using Docker)
+├── .env                        # Environment variables (API keys, database credentials, etc.)
+├── .gitignore                  # Git ignore file (for excluding sensitive files like .env, __pycache__, etc.)
+├── docker-compose.yml          # Docker Compose configuration (for containerized deployment, if using Docker)
 ├── LICENSE                     # License file
-├── README.md                   # Documentation file
-└── structure.txt               # Project structure documentation
+├── README.md                   # Project documentation and setup instructions
+└── structure.txt               # Project structure documentation (this file)
