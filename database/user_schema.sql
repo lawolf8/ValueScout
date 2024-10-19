@@ -15,5 +15,6 @@ CREATE TABLE IF NOT EXISTS user_lists (
     userid serial REFERENCES users(userid),
     list_name VARCHAR(255) UNIQUE NOT NULL,
     item VARCHAR(50) NOT NULL,
-    item_quantity INT NOT NULL
+    item_quantity INT NOT NULL,
+    item_cost REAL(2)
 );
